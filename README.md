@@ -6,7 +6,8 @@ ReVerif is a web-based tool meant to retrieve of the verification link to verify
 
 ## How It Works
 
-If you're using my backend, it processes your ROBLOXSecurity cookie through my server to generate a verification link from ROBLOX's API. If you do not feel comfortable with that you can self-host the tool or use the NodeJS script instead
+If you're using my backend, it processes your ROBLOXSecurity cookie through my server to generate a verification link from ROBLOX's API. If you do not feel comfortable with that you can [self-host the tool](extras/index.js) or use the [NodeJS script](https://github.com/T-am3/ReVerif-Backend) instead.
+
 
 ## Features
 
