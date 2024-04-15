@@ -12,7 +12,7 @@ const ReVerif: React.FC = () => {
 
     try {
       const response = await fetch(
-        "http://localhost:3000/getVerificationLink",
+        "https://reverif.vercel.app/getVerificationLink",
         {
           method: "POST",
           headers: {
