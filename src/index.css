@@ -8,3 +8,33 @@ body {
   background-color: #0f1016;
   font-family: Karla;
 }
+
+.animate-button {
+  transition: all 0.3s ease-in-out;
+}
+
+.animate-button:hover {
+  transform: scale(1.1);
+}
+
+.animate-input {
+  transition: all 0.3s ease-in-out;
+}
+
+.animate-input:focus {
+  transform: scale(1.02);
+  border-color: #4a56e2;
+}
+
+/* Define a keyframes animation */
+@keyframes fadeIn {
+  0% {opacity: 0;}
+  100% {opacity: 1;}
+}
+
+/* Apply the animation to all elements */
+* {
+  animation-name: fadeIn;
+  animation-duration: 0.4s;
+  animation-fill-mode: both;
+}
