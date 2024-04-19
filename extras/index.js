@@ -1,4 +1,5 @@
-const axios = require('axios');
+// - Almost all lines will be commented as some people suspect this. Also if you verify, you cannot generate a new verification link on your account.
+const axios = require('axios'); // - Access to internet APIs, use "npm i axios" in Terminal if you don't have it installed already.
 const readline = require('readline');
 
 const rl = readline.createInterface({
@@ -7,17 +8,17 @@ const rl = readline.createInterface({
 });
 
 async function getCSRFToken(cookie) {
-    try {
-        const response = await axios.post("https://auth.roblox.com/v2/logout", null, {
+    return new Promise((resolve, reject) => {
+        axios.request({
+            url: "https://auth.roblox.com/v2/logout",
+            method: "post", // - Sends a POST request to the Roblox Logout API. This is required to confirm the cookie.
             headers: {
-                Cookie: `.ROBLOSECURITY=${cookie}`
+                Cookie: ".ROBLOSECURITY=" + cookie // - Uses your .ROBLOSECURITY cookie to generate a verification link using the Roblox API
             }
-        });
-        return response.headers["x-csrf-token"];
-    } catch (error) {
-        console.error('Error occurred while fetching CSRF token:', error);
-        return null;
-    }
+        }).catch(function (error) {
+            resolve(error.response.headers["x-csrf-token"])
+        })
+    })
 }
 
 function promptForCookie() {
@@ -30,7 +31,7 @@ function promptForCookie() {
 }
 
 async function fetchVerificationLink(cookie) {
-    const url = 'https://apis.roblox.com/age-verification-service/v1/persona-id-verification/start-verification';
+    const url = 'https://apis.roblox.com/age-verification-service/v1/persona-id-verification/start-verification'; // - Sends a request to the Veriff (Roblox's ID verification service) API to generate a new link
 
     const headers = {
         accept: 'application/json, text/plain, */*',
@@ -46,7 +47,7 @@ async function fetchVerificationLink(cookie) {
         'sec-fetch-site': 'same-site',
         'sec-gpc': '1',
         'x-csrf-token': await getCSRFToken(cookie),
-        cookie: `.ROBLOSECURITY=${cookie}`
+        cookie: ".ROBLOSECURITY=" + cookie
     };
 
     const body = {
@@ -55,7 +56,8 @@ async function fetchVerificationLink(cookie) {
 
     try {
         const response = await axios.post(url, body, { headers, withCredentials: true });
-        return response.data.verificationLink;
+        const verificationLink = response.data.verificationLink; 
+        return verificationLink; // - Uses your .ROBLOSECURITY cookie to generate a verification link using the Roblox API. The cookie is only used in the Roblox API, not the script.
     } catch (error) {
         console.error('Error occurred while fetching verification link:', error);
         return null;
@@ -68,11 +70,12 @@ async function main() {
         const verificationLink = await fetchVerificationLink(cookie);
 
         if (verificationLink) {
-            console.log('Verification Link:', verificationLink);
+            console.log('Verification Link:', verificationLink); 
         }
     } catch (error) {
-        console.error('An error occurred:', error);
+        console.error('An error occurred (possibly because you tried verifying but failed, re-try in 7 days):', error);
     }
 }
 
-main();
+main(); // - Outputs the verification link if done correctly.
+// Happy verifying! Thanks to https://github.com/RobloxDevs for the original script.
