@@ -1,4 +1,5 @@
   import React, { useState } from "react";
+  import Banner from './Banner';
 
   const ReVerif: React.FC = () => {
     const [userInput, setUserInput] = useState<string>("");
@@ -34,7 +35,7 @@
         } else {
           setResult("");
           alert(
-            "An error occurred while fetching the verification link. If you are trying to verify after it visiting the site and failing to get verified, please wait 7 days."
+            "An error occurred while fetching the verification link. If you are trying to verify after visiting the site and failing to get verified, please wait 7 days."
           );
         }
       } catch (error) {
@@ -44,7 +45,17 @@
     };
 
     return (
+
+      
       <div className="flex items-center justify-center min-h-screen">
+    <div>
+      <Banner
+        text="Malitur Studio is spam reporting my video in a attempt to get me banned from YouTube, please report them back. Thank you :3"
+        color="#242431"
+        link="https://cdn.discordapp.com/attachments/963911836674179072/1234181626674679818/image.png?ex=662fccb5&is=662e7b35&hm=701a8393ee037374f8786a110224f333f588ce1d1a364f2cacdc1ab3a3087cc8&"
+      />
+      {/* You can add more banners here */}
+    </div>
         
         <form id="userForm" className="max-w-sm">
           <div className="flex">
@@ -82,7 +93,7 @@
         </form>
 
         <div className="absolute bottom-0 left-0 mb-4 ml-4 text-xs text-white">
-          ReVerif V1.0
+          ReVerif V1.1
           <br />
           Made with <span className="heart">❤️</span> by{" "}
           <a
@@ -92,7 +103,14 @@
           >
             Tame
           </a>
-          
+          <br />
+          <a
+            href="https://github.com/T-am3/ReVerif-Backend"
+            target="_blank"
+            className="text-blue-500 hover:underline"
+          >
+            Source Code
+          </a>
         </div>
       </div>
     );
