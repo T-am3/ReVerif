@@ -1,21 +1,30 @@
-# ReVerif
+# React + TypeScript + Vite
 
-<img src="https://raw.githubusercontent.com/T-am3/ReVerif/main/public/icon.png" width="100">
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-ReVerif is a web-based tool meant to retrieve of the verification link to verify their age. Unlocking access to features such as voice chat typically restricted to users aged 13 and above on ROBLOX. Along with that removing that pesky safechat that no one likes!
+Currently, two official plugins are available:
 
-## How It Works
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
-If you're using my backend, it processes your ROBLOXSecurity cookie through my server to generate a verification link from ROBLOX's API. If you do not feel comfortable with that you can [self-host the tool](https://github.com/T-am3/ReVerif-Backend) or use the [NodeJS script](extras/index.js) instead.
+## Expanding the ESLint configuration
 
+If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
 
-## Features
+- Configure the top-level `parserOptions` property like this:
 
-- Retrieve the age verification link for ROBLOX accounts.
-- Enable users to verify their age and unlock features restricted to users aged 13 and above.
-- Accessible from any web browser, providing convenience to users.
-- I don't know, look cool?
+```js
+export default {
+  // other rules...
+  parserOptions: {
+    ecmaVersion: 'latest',
+    sourceType: 'module',
+    project: ['./tsconfig.json', './tsconfig.node.json'],
+    tsconfigRootDir: __dirname,
+  },
+}
+```
 
-## Contribution
-
-Contributions to ReVerif are welcome! If you encounter any issues, have suggestions for improvements, or would like to contribute code, please feel free to open an issue or submit a pull request.
+- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
+- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
+- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
